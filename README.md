@@ -67,6 +67,7 @@ class MyTracker extens HttpAwareTracker
 
 $tracker = new MyTracker();
 $shipment = $tracker->track('foo-tracking-number');
+
 print_r($shipment):
 ```
 
