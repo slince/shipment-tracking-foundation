@@ -27,5 +27,12 @@ class HttpAwareTrackerTest extends TestCase
         $tracker = $this->getMockBuilder(HttpAwareTracker::class)->getMockForAbstractClass();
         $httpClient = $tracker->getHttpClient();
         $this->assertInstanceOf(Client::class, $httpClient);
+
+        $tracker = $this->getMockBuilder(HttpAwareTracker::class)->getMockForAbstractClass();
+        $httpClient = new Client();
+        $this->assertAttributeNotInstanceOf(Client::class, 'httpClient', $tracker);
+        $tracker->setHttpClient($httpClient);
+        $this->assertAttributeInstanceOf(Client::class, 'httpClient', $tracker);
+        $this->assertEquals($httpClient, $tracker->getHttpClient());
     }
 }
