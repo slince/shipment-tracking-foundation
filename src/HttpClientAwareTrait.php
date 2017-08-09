@@ -22,4 +22,16 @@ trait HttpClientAwareTrait
     {
         $this->httpClient = $httpClient;
     }
+
+    /**
+     * Gets the http client
+     * @return HttpClient
+     */
+    public function getHttpClient()
+    {
+        if (!is_null($this->httpClient)) {
+            return $this->httpClient;
+        }
+        return $this->httpClient = new HttpClient();
+    }
 }

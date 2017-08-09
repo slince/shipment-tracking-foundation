@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Slince\\ShipmentTracking\\Foundation\\": "./src/Foundation"
+            "Slince\\ShipmentTracking\\Foundation\\": "./src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Slince\\ShipmentTracking\\Foundation\\Tests\\": "tests/"
+            "Slince\\ShipmentTracking\\Foundation\\Tests\\": "./tests"
         }
     }
 }

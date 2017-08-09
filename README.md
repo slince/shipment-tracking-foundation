@@ -1,4 +1,4 @@
-# Shipment Tracking Library
+# Shipment Tracking Foundation
 
 [![Build Status](https://img.shields.io/travis/slince/shipment-tracking-foundation/master.svg?style=flat-square)](https://travis-ci.org/slince/shipment-tracking-foundation)
 [![Coverage Status](https://img.shields.io/codecov/c/github/slince/shipment-tracking-foundation.svg?style=flat-square)](https://codecov.io/github/slince/shipment-tracking-foundation)
@@ -29,9 +29,49 @@ try {
 
 ```
 
+## How to create your own tracker?
+
 All shipment trackers must implement `Slince\ShipmentTracking\Foundation\TrackerInterface`, and will usually extend `Slince\ShipmentTracking\Foundation\HttpAwareTracker` for basic functionality if the carrier's api is based on
 HTTP
 
+```php
+namespace My\Tracker;
+
+use Slince\ShipmentTracking\Foundation\HttpAwareTracker;
+use Slince\ShipmentTracking\Foundation\Shipment;
+
+class MyTracker extens HttpAwareTracker
+{
+   /**
+    * {@inheritdoc}
+    */
+    public function track($trackingNumber)
+    {
+        $response = $this->getHttpClient()->get('/../endpoint', [
+            'query' => [
+                'tracking_number' => $trackingNumber
+            ]
+        ]);
+        return static::buildShipment($response):
+    }
+    
+    /**
+     * @return Shipment
+     */
+    public function buildShipment($response)
+    {
+        //....
+    }
+}
+
+
+$tracker = new MyTracker();
+$shipment = $tracker->track('foo-tracking-number');
+print_r($shipment):
+```
+
+You can extend all existing classes if you need.
+ 
 ## Shipment trackers:
 
 The following carriers are available:
@@ -40,7 +80,7 @@ The following carriers are available:
 | --- | --- | --- |
 | [DHL eCommerce](https://github.com/slince/shipment-tracking)| slince/shipment-tracking | [Tao](https://github.com/slince) |
 | [Yanwen Exprerss(燕文物流)](https://github.com/slince/shipment-tracking)| slince/shipment-tracking | [Tao](https://github.com/slince) |
-| [快递100](https://github.com/slince/shipment-tracking)| slince/shipment-tracking-foundation | [Tao](https://github.com/slince) |
+| [快递100](https://github.com/slince/shipment-tracking)| slince/shipment-tracking | [Tao](https://github.com/slince) |
 | [E邮宝/E包裹/E特快/国际EMS](https://github.com/slince/shipment-tracking)| slince/shipment-tracking | [Tao](https://github.com/slince) |
 
 ## License
