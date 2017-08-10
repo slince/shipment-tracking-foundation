@@ -40,7 +40,7 @@ namespace My\Tracker;
 use Slince\ShipmentTracking\Foundation\HttpAwareTracker;
 use Slince\ShipmentTracking\Foundation\Shipment;
 
-class MyTracker extens HttpAwareTracker
+class MyTracker extends HttpAwareTracker
 {
    /**
     * {@inheritdoc}
