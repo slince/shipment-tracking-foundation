@@ -10,6 +10,8 @@ class LocationTest extends TestCase
     public function testBase()
     {
         $location = $this->getMockForAbstractClass(LocationInterface::class);
-        $this->assertTrue(method_exists($location, '__toString'));
+        $this->assertTrue(method_exists($location, 'toString'));
+        $this->assertInstanceOf(\JsonSerializable::class, $location);
+        $this->assertTrue(method_exists($location, 'jsonSerialize'));
     }
 }

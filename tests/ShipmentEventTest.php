@@ -10,7 +10,7 @@ class ShipmentEventTest extends TestCase
     {
         $now = new \DateTime();
         $event = new ShipmentEvent($now, 'foo', 'bar');
-        $this->assertEquals($now, $event->getDate());
+        $this->assertEquals($now, $event->getTime());
         $this->assertEquals('foo', $event->getDescription());
         $this->assertEquals('bar', $event->getLocation());
     }
@@ -19,7 +19,7 @@ class ShipmentEventTest extends TestCase
     {
         $event = new ShipmentEvent();
         $this->assertNull($event->getLocation());
-        $this->assertNull($event->getDate());
+        $this->assertNull($event->getTime());
         $this->assertNull($event->getDescription());
         $this->assertNull($event->getStatus());
 
@@ -29,7 +29,7 @@ class ShipmentEventTest extends TestCase
         $event->setLocation('bar');
         $event->setStatus('baz');
 
-        $this->assertEquals($now, $event->getDate());
+        $this->assertEquals($now, $event->getTime());
         $this->assertEquals('foo', $event->getDescription());
         $this->assertEquals('bar', $event->getLocation());
         $this->assertEquals('baz', $event->getStatus());
@@ -52,6 +52,7 @@ class ShipmentEventTest extends TestCase
             'description' => null,
             'location' => null,
             'date' => null,
+            'time' => null,
             'status' => null
         ], $event->toArray());
     }
