@@ -5,12 +5,14 @@
  */
 namespace Slince\ShipmentTracking\Foundation;
 
+use Carbon\Carbon;
 use Slince\ShipmentTracking\Foundation\Location\LocationInterface;
 
 class ShipmentEvent implements \JsonSerializable
 {
     /**
      * @var \DateTime
+     * @deprecated
      */
     protected $date;
 
@@ -29,15 +31,21 @@ class ShipmentEvent implements \JsonSerializable
      */
     protected $status;
 
-    public function __construct(\DateTime $date = null, $description = null, $location = null)
+    /**
+     * @var \DateTime
+     */
+    protected $time;
+
+    public function __construct(\DateTime $time = null, $description = null, $location = null)
     {
-        $this->date = $date;
+        $this->setTime($time);
         $this->description = $description;
         $this->location = $location;
     }
 
     /**
      * @return \DateTime
+     * @deprecated
      */
     public function getDate()
     {
@@ -47,10 +55,35 @@ class ShipmentEvent implements \JsonSerializable
     /**
      * @param \DateTime $date
      * @return ShipmentEvent
+     * @deprecated
      */
     public function setDate($date)
     {
-        $this->date = $date;
+        if (!$date instanceof \DateTime) {
+            $date = Carbon::parse($date);
+        }
+        $this->setTime($date);
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param \DateTime $time
+     * @return ShipmentEvent
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+        if ($time) {
+            $this->date = $time->format('Y-m-d H:i:s');
+        }
         return $this;
     }
 
