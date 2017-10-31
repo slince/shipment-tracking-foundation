@@ -5,6 +5,8 @@
  */
 namespace Slince\ShipmentTracking\Foundation;
 
+use Slince\ShipmentTracking\Foundation\Location\LocationInterface;
+
 class ShipmentEvent implements \JsonSerializable
 {
     /**
@@ -18,7 +20,7 @@ class ShipmentEvent implements \JsonSerializable
     protected $description;
 
     /**
-     * @var string
+     * @var string|LocationInterface
      */
     protected $location;
 
@@ -71,7 +73,7 @@ class ShipmentEvent implements \JsonSerializable
     }
 
     /**
-     * @return string
+     * @return string|LocationInterface
      */
     public function getLocation()
     {
@@ -79,7 +81,7 @@ class ShipmentEvent implements \JsonSerializable
     }
 
     /**
-     * @param string $location
+     * @param string|LocationInterface $location
      * @return ShipmentEvent
      */
     public function setLocation($location)
