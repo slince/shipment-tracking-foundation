@@ -60,7 +60,7 @@ class ShipmentEvent implements \JsonSerializable
     public function setDate($date)
     {
         if (!$date instanceof \DateTime) {
-            $date = Carbon::parse($date);
+            $date = new \DateTime($date);
         }
         $this->setTime($date);
         return $this;
