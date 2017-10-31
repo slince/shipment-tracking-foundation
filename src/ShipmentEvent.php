@@ -5,7 +5,6 @@
  */
 namespace Slince\ShipmentTracking\Foundation;
 
-use Carbon\Carbon;
 use Slince\ShipmentTracking\Foundation\Location\LocationInterface;
 
 class ShipmentEvent implements \JsonSerializable
