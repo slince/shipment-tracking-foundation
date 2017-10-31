@@ -5,11 +5,13 @@
  */
 namespace Slince\ShipmentTracking\Foundation\Location;
 
-interface LocationInterface
+use JsonSerializable;
+
+interface LocationInterface extends JsonSerializable
 {
     /**
      * Converts to string
      * @return string
      */
-    public function __toString();
+    public function toString();
 }
